@@ -1,0 +1,721 @@
+
+DIO_ASSIGHNMENT22.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         0000049a  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  000004ee  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  000004ee  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000520  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000068  00000000  00000000  0000055c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   000013f6  00000000  00000000  000005c4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 000006a8  00000000  00000000  000019ba  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000071a  00000000  00000000  00002062  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000000a8  00000000  00000000  0000277c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000459  00000000  00000000  00002824  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000ab9  00000000  00000000  00002c7d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000048  00000000  00000000  00003736  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 6e 00 	call	0xdc	; 0xdc <main>
+  64:	0c 94 4b 02 	jmp	0x496	; 0x496 <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <DIO_SetPortValue>:
+		
+	}
+}
+
+void DIO_SetPortValue(u8 port, u8 Value){ //11111111==255
+	switch(port){
+  6c:	81 30       	cpi	r24, 0x01	; 1
+  6e:	41 f0       	breq	.+16     	; 0x80 <DIO_SetPortValue+0x14>
+  70:	28 f0       	brcs	.+10     	; 0x7c <DIO_SetPortValue+0x10>
+  72:	82 30       	cpi	r24, 0x02	; 2
+  74:	39 f0       	breq	.+14     	; 0x84 <DIO_SetPortValue+0x18>
+  76:	83 30       	cpi	r24, 0x03	; 3
+  78:	39 f0       	breq	.+14     	; 0x88 <DIO_SetPortValue+0x1c>
+  7a:	08 95       	ret
+		case Port_A:
+		PORTA=Value;
+  7c:	6b bb       	out	0x1b, r22	; 27
+		break;
+  7e:	08 95       	ret
+		case Port_B:
+		PORTB=Value;
+  80:	68 bb       	out	0x18, r22	; 24
+		break;
+  82:	08 95       	ret
+		case Port_C:
+		PORTC=Value;
+  84:	65 bb       	out	0x15, r22	; 21
+		break;
+  86:	08 95       	ret
+		case Port_D:
+		PORTD=Value;
+  88:	62 bb       	out	0x12, r22	; 18
+  8a:	08 95       	ret
+
+0000008c <DIO_SetPortDirection>:
+		
+	}
+}
+
+void DIO_SetPortDirection(u8 port, u8 Direction){
+	switch(port){
+  8c:	81 30       	cpi	r24, 0x01	; 1
+  8e:	41 f0       	breq	.+16     	; 0xa0 <DIO_SetPortDirection+0x14>
+  90:	28 f0       	brcs	.+10     	; 0x9c <DIO_SetPortDirection+0x10>
+  92:	82 30       	cpi	r24, 0x02	; 2
+  94:	39 f0       	breq	.+14     	; 0xa4 <DIO_SetPortDirection+0x18>
+  96:	83 30       	cpi	r24, 0x03	; 3
+  98:	39 f0       	breq	.+14     	; 0xa8 <DIO_SetPortDirection+0x1c>
+  9a:	08 95       	ret
+		case Port_A:
+		DDRA=Direction;
+  9c:	6a bb       	out	0x1a, r22	; 26
+		break;
+  9e:	08 95       	ret
+		case Port_B:
+		DDRB=Direction;
+  a0:	67 bb       	out	0x17, r22	; 23
+		break;
+  a2:	08 95       	ret
+		case Port_C:
+		DDRC=Direction;
+  a4:	64 bb       	out	0x14, r22	; 20
+		break;
+  a6:	08 95       	ret
+		case Port_D:
+		DDRD=Direction;
+  a8:	61 bb       	out	0x11, r22	; 17
+  aa:	08 95       	ret
+
+000000ac <DIO_GetPortValue>:
+		
+	}
+}
+
+void DIO_GetPortValue(u8 port, u8 *value){ //(port_A,&x)
+	switch(port){
+  ac:	81 30       	cpi	r24, 0x01	; 1
+  ae:	51 f0       	breq	.+20     	; 0xc4 <DIO_GetPortValue+0x18>
+  b0:	28 f0       	brcs	.+10     	; 0xbc <DIO_GetPortValue+0x10>
+  b2:	82 30       	cpi	r24, 0x02	; 2
+  b4:	59 f0       	breq	.+22     	; 0xcc <DIO_GetPortValue+0x20>
+  b6:	83 30       	cpi	r24, 0x03	; 3
+  b8:	69 f0       	breq	.+26     	; 0xd4 <DIO_GetPortValue+0x28>
+  ba:	08 95       	ret
+		case Port_A:
+		*value=PINA;
+  bc:	89 b3       	in	r24, 0x19	; 25
+  be:	fb 01       	movw	r30, r22
+  c0:	80 83       	st	Z, r24
+		break;
+  c2:	08 95       	ret
+		case Port_B:
+		*value=PINB;
+  c4:	86 b3       	in	r24, 0x16	; 22
+  c6:	fb 01       	movw	r30, r22
+  c8:	80 83       	st	Z, r24
+		break;
+  ca:	08 95       	ret
+		case Port_C:
+		*value=PINC;
+  cc:	83 b3       	in	r24, 0x13	; 19
+  ce:	fb 01       	movw	r30, r22
+  d0:	80 83       	st	Z, r24
+		break;
+  d2:	08 95       	ret
+		case Port_D:
+		*value=PIND;
+  d4:	80 b3       	in	r24, 0x10	; 16
+  d6:	fb 01       	movw	r30, r22
+  d8:	80 83       	st	Z, r24
+  da:	08 95       	ret
+
+000000dc <main>:
+#include "STDTYPE.h"
+#include "UTILS.h"
+#include "DIO_interface.h"
+
+int main(void)
+{
+  dc:	cf 93       	push	r28
+  de:	df 93       	push	r29
+  e0:	1f 92       	push	r1
+  e2:	cd b7       	in	r28, 0x3d	; 61
+  e4:	de b7       	in	r29, 0x3e	; 62
+    DIO_SetPortDirection(Port_A,Port_input);
+  e6:	60 e0       	ldi	r22, 0x00	; 0
+  e8:	80 e0       	ldi	r24, 0x00	; 0
+  ea:	0e 94 46 00 	call	0x8c	; 0x8c <DIO_SetPortDirection>
+	DIO_SetPortValue(Port_A,255);	
+  ee:	6f ef       	ldi	r22, 0xFF	; 255
+  f0:	80 e0       	ldi	r24, 0x00	; 0
+  f2:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+	DIO_SetPortDirection(Port_C,Port_output);
+  f6:	6f ef       	ldi	r22, 0xFF	; 255
+  f8:	82 e0       	ldi	r24, 0x02	; 2
+  fa:	0e 94 46 00 	call	0x8c	; 0x8c <DIO_SetPortDirection>
+	u8 x=0;
+  fe:	19 82       	std	Y+1, r1	; 0x01
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 100:	2f ef       	ldi	r18, 0xFF	; 255
+ 102:	82 e5       	ldi	r24, 0x52	; 82
+ 104:	97 e0       	ldi	r25, 0x07	; 7
+ 106:	21 50       	subi	r18, 0x01	; 1
+ 108:	80 40       	sbci	r24, 0x00	; 0
+ 10a:	90 40       	sbci	r25, 0x00	; 0
+ 10c:	e1 f7       	brne	.-8      	; 0x106 <main+0x2a>
+ 10e:	00 c0       	rjmp	.+0      	; 0x110 <main+0x34>
+ 110:	00 00       	nop
+    while (1) 
+    {
+	_delay_ms(300);
+	DIO_GetPortValue(Port_A,&x);
+ 112:	be 01       	movw	r22, r28
+ 114:	6f 5f       	subi	r22, 0xFF	; 255
+ 116:	7f 4f       	sbci	r23, 0xFF	; 255
+ 118:	80 e0       	ldi	r24, 0x00	; 0
+ 11a:	0e 94 56 00 	call	0xac	; 0xac <DIO_GetPortValue>
+	//flashing
+	if(x==1){
+ 11e:	89 81       	ldd	r24, Y+1	; 0x01
+ 120:	81 30       	cpi	r24, 0x01	; 1
+ 122:	91 f4       	brne	.+36     	; 0x148 <main+0x6c>
+		DIO_SetPortValue(Port_C,255);
+ 124:	6f ef       	ldi	r22, 0xFF	; 255
+ 126:	82 e0       	ldi	r24, 0x02	; 2
+ 128:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 12c:	2f ef       	ldi	r18, 0xFF	; 255
+ 12e:	84 e3       	ldi	r24, 0x34	; 52
+ 130:	9c e0       	ldi	r25, 0x0C	; 12
+ 132:	21 50       	subi	r18, 0x01	; 1
+ 134:	80 40       	sbci	r24, 0x00	; 0
+ 136:	90 40       	sbci	r25, 0x00	; 0
+ 138:	e1 f7       	brne	.-8      	; 0x132 <main+0x56>
+ 13a:	00 c0       	rjmp	.+0      	; 0x13c <main+0x60>
+ 13c:	00 00       	nop
+		_delay_ms(500);
+		DIO_SetPortValue(Port_C,0);	
+ 13e:	60 e0       	ldi	r22, 0x00	; 0
+ 140:	82 e0       	ldi	r24, 0x02	; 2
+ 142:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 146:	dc cf       	rjmp	.-72     	; 0x100 <main+0x24>
+	}
+	//sheft left
+	else if(x==3){
+ 148:	83 30       	cpi	r24, 0x03	; 3
+ 14a:	09 f0       	breq	.+2      	; 0x14e <main+0x72>
+ 14c:	96 c0       	rjmp	.+300    	; 0x27a <main+0x19e>
+		DIO_SetPortValue(Port_C,1);
+ 14e:	61 e0       	ldi	r22, 0x01	; 1
+ 150:	82 e0       	ldi	r24, 0x02	; 2
+ 152:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 156:	2f e7       	ldi	r18, 0x7F	; 127
+ 158:	8a e1       	ldi	r24, 0x1A	; 26
+ 15a:	96 e0       	ldi	r25, 0x06	; 6
+ 15c:	21 50       	subi	r18, 0x01	; 1
+ 15e:	80 40       	sbci	r24, 0x00	; 0
+ 160:	90 40       	sbci	r25, 0x00	; 0
+ 162:	e1 f7       	brne	.-8      	; 0x15c <main+0x80>
+ 164:	00 c0       	rjmp	.+0      	; 0x166 <main+0x8a>
+ 166:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 168:	60 e0       	ldi	r22, 0x00	; 0
+ 16a:	82 e0       	ldi	r24, 0x02	; 2
+ 16c:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+		DIO_SetPortValue(Port_C,2);
+ 170:	62 e0       	ldi	r22, 0x02	; 2
+ 172:	82 e0       	ldi	r24, 0x02	; 2
+ 174:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 178:	2f e7       	ldi	r18, 0x7F	; 127
+ 17a:	8a e1       	ldi	r24, 0x1A	; 26
+ 17c:	96 e0       	ldi	r25, 0x06	; 6
+ 17e:	21 50       	subi	r18, 0x01	; 1
+ 180:	80 40       	sbci	r24, 0x00	; 0
+ 182:	90 40       	sbci	r25, 0x00	; 0
+ 184:	e1 f7       	brne	.-8      	; 0x17e <main+0xa2>
+ 186:	00 c0       	rjmp	.+0      	; 0x188 <main+0xac>
+ 188:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 18a:	60 e0       	ldi	r22, 0x00	; 0
+ 18c:	82 e0       	ldi	r24, 0x02	; 2
+ 18e:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+		DIO_SetPortValue(Port_C,4);
+ 192:	64 e0       	ldi	r22, 0x04	; 4
+ 194:	82 e0       	ldi	r24, 0x02	; 2
+ 196:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 19a:	2f e7       	ldi	r18, 0x7F	; 127
+ 19c:	8a e1       	ldi	r24, 0x1A	; 26
+ 19e:	96 e0       	ldi	r25, 0x06	; 6
+ 1a0:	21 50       	subi	r18, 0x01	; 1
+ 1a2:	80 40       	sbci	r24, 0x00	; 0
+ 1a4:	90 40       	sbci	r25, 0x00	; 0
+ 1a6:	e1 f7       	brne	.-8      	; 0x1a0 <main+0xc4>
+ 1a8:	00 c0       	rjmp	.+0      	; 0x1aa <main+0xce>
+ 1aa:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 1ac:	60 e0       	ldi	r22, 0x00	; 0
+ 1ae:	82 e0       	ldi	r24, 0x02	; 2
+ 1b0:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+		DIO_SetPortValue(Port_C,8);
+ 1b4:	68 e0       	ldi	r22, 0x08	; 8
+ 1b6:	82 e0       	ldi	r24, 0x02	; 2
+ 1b8:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 1bc:	2f e7       	ldi	r18, 0x7F	; 127
+ 1be:	8a e1       	ldi	r24, 0x1A	; 26
+ 1c0:	96 e0       	ldi	r25, 0x06	; 6
+ 1c2:	21 50       	subi	r18, 0x01	; 1
+ 1c4:	80 40       	sbci	r24, 0x00	; 0
+ 1c6:	90 40       	sbci	r25, 0x00	; 0
+ 1c8:	e1 f7       	brne	.-8      	; 0x1c2 <main+0xe6>
+ 1ca:	00 c0       	rjmp	.+0      	; 0x1cc <main+0xf0>
+ 1cc:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 1ce:	60 e0       	ldi	r22, 0x00	; 0
+ 1d0:	82 e0       	ldi	r24, 0x02	; 2
+ 1d2:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+		DIO_SetPortValue(Port_C,16);
+ 1d6:	60 e1       	ldi	r22, 0x10	; 16
+ 1d8:	82 e0       	ldi	r24, 0x02	; 2
+ 1da:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 1de:	2f e7       	ldi	r18, 0x7F	; 127
+ 1e0:	8a e1       	ldi	r24, 0x1A	; 26
+ 1e2:	96 e0       	ldi	r25, 0x06	; 6
+ 1e4:	21 50       	subi	r18, 0x01	; 1
+ 1e6:	80 40       	sbci	r24, 0x00	; 0
+ 1e8:	90 40       	sbci	r25, 0x00	; 0
+ 1ea:	e1 f7       	brne	.-8      	; 0x1e4 <main+0x108>
+ 1ec:	00 c0       	rjmp	.+0      	; 0x1ee <main+0x112>
+ 1ee:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 1f0:	60 e0       	ldi	r22, 0x00	; 0
+ 1f2:	82 e0       	ldi	r24, 0x02	; 2
+ 1f4:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+		DIO_SetPortValue(Port_C,32);
+ 1f8:	60 e2       	ldi	r22, 0x20	; 32
+ 1fa:	82 e0       	ldi	r24, 0x02	; 2
+ 1fc:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 200:	2f e7       	ldi	r18, 0x7F	; 127
+ 202:	8a e1       	ldi	r24, 0x1A	; 26
+ 204:	96 e0       	ldi	r25, 0x06	; 6
+ 206:	21 50       	subi	r18, 0x01	; 1
+ 208:	80 40       	sbci	r24, 0x00	; 0
+ 20a:	90 40       	sbci	r25, 0x00	; 0
+ 20c:	e1 f7       	brne	.-8      	; 0x206 <main+0x12a>
+ 20e:	00 c0       	rjmp	.+0      	; 0x210 <main+0x134>
+ 210:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 212:	60 e0       	ldi	r22, 0x00	; 0
+ 214:	82 e0       	ldi	r24, 0x02	; 2
+ 216:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+		DIO_SetPortValue(Port_C,64);
+ 21a:	60 e4       	ldi	r22, 0x40	; 64
+ 21c:	82 e0       	ldi	r24, 0x02	; 2
+ 21e:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 222:	2f e7       	ldi	r18, 0x7F	; 127
+ 224:	8a e1       	ldi	r24, 0x1A	; 26
+ 226:	96 e0       	ldi	r25, 0x06	; 6
+ 228:	21 50       	subi	r18, 0x01	; 1
+ 22a:	80 40       	sbci	r24, 0x00	; 0
+ 22c:	90 40       	sbci	r25, 0x00	; 0
+ 22e:	e1 f7       	brne	.-8      	; 0x228 <main+0x14c>
+ 230:	00 c0       	rjmp	.+0      	; 0x232 <main+0x156>
+ 232:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 234:	60 e0       	ldi	r22, 0x00	; 0
+ 236:	82 e0       	ldi	r24, 0x02	; 2
+ 238:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+		DIO_SetPortValue(Port_C,128);
+ 23c:	60 e8       	ldi	r22, 0x80	; 128
+ 23e:	82 e0       	ldi	r24, 0x02	; 2
+ 240:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 244:	2f e7       	ldi	r18, 0x7F	; 127
+ 246:	8a e1       	ldi	r24, 0x1A	; 26
+ 248:	96 e0       	ldi	r25, 0x06	; 6
+ 24a:	21 50       	subi	r18, 0x01	; 1
+ 24c:	80 40       	sbci	r24, 0x00	; 0
+ 24e:	90 40       	sbci	r25, 0x00	; 0
+ 250:	e1 f7       	brne	.-8      	; 0x24a <main+0x16e>
+ 252:	00 c0       	rjmp	.+0      	; 0x254 <main+0x178>
+ 254:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 256:	60 e0       	ldi	r22, 0x00	; 0
+ 258:	82 e0       	ldi	r24, 0x02	; 2
+ 25a:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+		DIO_SetPortValue(Port_C,0);
+ 25e:	60 e0       	ldi	r22, 0x00	; 0
+ 260:	82 e0       	ldi	r24, 0x02	; 2
+ 262:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 266:	2f e7       	ldi	r18, 0x7F	; 127
+ 268:	8a e1       	ldi	r24, 0x1A	; 26
+ 26a:	96 e0       	ldi	r25, 0x06	; 6
+ 26c:	21 50       	subi	r18, 0x01	; 1
+ 26e:	80 40       	sbci	r24, 0x00	; 0
+ 270:	90 40       	sbci	r25, 0x00	; 0
+ 272:	e1 f7       	brne	.-8      	; 0x26c <main+0x190>
+ 274:	00 c0       	rjmp	.+0      	; 0x276 <main+0x19a>
+ 276:	00 00       	nop
+ 278:	43 cf       	rjmp	.-378    	; 0x100 <main+0x24>
+		_delay_ms(250);
+	}
+	
+	//sheft right
+	else if(x==7){
+ 27a:	87 30       	cpi	r24, 0x07	; 7
+ 27c:	09 f0       	breq	.+2      	; 0x280 <main+0x1a4>
+ 27e:	92 c0       	rjmp	.+292    	; 0x3a4 <main+0x2c8>
+		DIO_SetPortValue(Port_C,128);
+ 280:	60 e8       	ldi	r22, 0x80	; 128
+ 282:	82 e0       	ldi	r24, 0x02	; 2
+ 284:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 288:	2f e7       	ldi	r18, 0x7F	; 127
+ 28a:	8a e1       	ldi	r24, 0x1A	; 26
+ 28c:	96 e0       	ldi	r25, 0x06	; 6
+ 28e:	21 50       	subi	r18, 0x01	; 1
+ 290:	80 40       	sbci	r24, 0x00	; 0
+ 292:	90 40       	sbci	r25, 0x00	; 0
+ 294:	e1 f7       	brne	.-8      	; 0x28e <main+0x1b2>
+ 296:	00 c0       	rjmp	.+0      	; 0x298 <main+0x1bc>
+ 298:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 29a:	60 e0       	ldi	r22, 0x00	; 0
+ 29c:	82 e0       	ldi	r24, 0x02	; 2
+ 29e:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+		DIO_SetPortValue(Port_C,64);
+ 2a2:	60 e4       	ldi	r22, 0x40	; 64
+ 2a4:	82 e0       	ldi	r24, 0x02	; 2
+ 2a6:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 2aa:	2f e7       	ldi	r18, 0x7F	; 127
+ 2ac:	8a e1       	ldi	r24, 0x1A	; 26
+ 2ae:	96 e0       	ldi	r25, 0x06	; 6
+ 2b0:	21 50       	subi	r18, 0x01	; 1
+ 2b2:	80 40       	sbci	r24, 0x00	; 0
+ 2b4:	90 40       	sbci	r25, 0x00	; 0
+ 2b6:	e1 f7       	brne	.-8      	; 0x2b0 <main+0x1d4>
+ 2b8:	00 c0       	rjmp	.+0      	; 0x2ba <main+0x1de>
+ 2ba:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 2bc:	60 e0       	ldi	r22, 0x00	; 0
+ 2be:	82 e0       	ldi	r24, 0x02	; 2
+ 2c0:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+		DIO_SetPortValue(Port_C,32);
+ 2c4:	60 e2       	ldi	r22, 0x20	; 32
+ 2c6:	82 e0       	ldi	r24, 0x02	; 2
+ 2c8:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 2cc:	2f e7       	ldi	r18, 0x7F	; 127
+ 2ce:	8a e1       	ldi	r24, 0x1A	; 26
+ 2d0:	96 e0       	ldi	r25, 0x06	; 6
+ 2d2:	21 50       	subi	r18, 0x01	; 1
+ 2d4:	80 40       	sbci	r24, 0x00	; 0
+ 2d6:	90 40       	sbci	r25, 0x00	; 0
+ 2d8:	e1 f7       	brne	.-8      	; 0x2d2 <main+0x1f6>
+ 2da:	00 c0       	rjmp	.+0      	; 0x2dc <main+0x200>
+ 2dc:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 2de:	60 e0       	ldi	r22, 0x00	; 0
+ 2e0:	82 e0       	ldi	r24, 0x02	; 2
+ 2e2:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+		DIO_SetPortValue(Port_C,16);
+ 2e6:	60 e1       	ldi	r22, 0x10	; 16
+ 2e8:	82 e0       	ldi	r24, 0x02	; 2
+ 2ea:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 2ee:	2f e7       	ldi	r18, 0x7F	; 127
+ 2f0:	8a e1       	ldi	r24, 0x1A	; 26
+ 2f2:	96 e0       	ldi	r25, 0x06	; 6
+ 2f4:	21 50       	subi	r18, 0x01	; 1
+ 2f6:	80 40       	sbci	r24, 0x00	; 0
+ 2f8:	90 40       	sbci	r25, 0x00	; 0
+ 2fa:	e1 f7       	brne	.-8      	; 0x2f4 <main+0x218>
+ 2fc:	00 c0       	rjmp	.+0      	; 0x2fe <main+0x222>
+ 2fe:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 300:	60 e0       	ldi	r22, 0x00	; 0
+ 302:	82 e0       	ldi	r24, 0x02	; 2
+ 304:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+		DIO_SetPortValue(Port_C,8);
+ 308:	68 e0       	ldi	r22, 0x08	; 8
+ 30a:	82 e0       	ldi	r24, 0x02	; 2
+ 30c:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 310:	2f e7       	ldi	r18, 0x7F	; 127
+ 312:	8a e1       	ldi	r24, 0x1A	; 26
+ 314:	96 e0       	ldi	r25, 0x06	; 6
+ 316:	21 50       	subi	r18, 0x01	; 1
+ 318:	80 40       	sbci	r24, 0x00	; 0
+ 31a:	90 40       	sbci	r25, 0x00	; 0
+ 31c:	e1 f7       	brne	.-8      	; 0x316 <main+0x23a>
+ 31e:	00 c0       	rjmp	.+0      	; 0x320 <main+0x244>
+ 320:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 322:	60 e0       	ldi	r22, 0x00	; 0
+ 324:	82 e0       	ldi	r24, 0x02	; 2
+ 326:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+		DIO_SetPortValue(Port_C,4);
+ 32a:	64 e0       	ldi	r22, 0x04	; 4
+ 32c:	82 e0       	ldi	r24, 0x02	; 2
+ 32e:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 332:	2f e7       	ldi	r18, 0x7F	; 127
+ 334:	8a e1       	ldi	r24, 0x1A	; 26
+ 336:	96 e0       	ldi	r25, 0x06	; 6
+ 338:	21 50       	subi	r18, 0x01	; 1
+ 33a:	80 40       	sbci	r24, 0x00	; 0
+ 33c:	90 40       	sbci	r25, 0x00	; 0
+ 33e:	e1 f7       	brne	.-8      	; 0x338 <main+0x25c>
+ 340:	00 c0       	rjmp	.+0      	; 0x342 <main+0x266>
+ 342:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 344:	60 e0       	ldi	r22, 0x00	; 0
+ 346:	82 e0       	ldi	r24, 0x02	; 2
+ 348:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+		DIO_SetPortValue(Port_C,2);
+ 34c:	62 e0       	ldi	r22, 0x02	; 2
+ 34e:	82 e0       	ldi	r24, 0x02	; 2
+ 350:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 354:	2f e7       	ldi	r18, 0x7F	; 127
+ 356:	8a e1       	ldi	r24, 0x1A	; 26
+ 358:	96 e0       	ldi	r25, 0x06	; 6
+ 35a:	21 50       	subi	r18, 0x01	; 1
+ 35c:	80 40       	sbci	r24, 0x00	; 0
+ 35e:	90 40       	sbci	r25, 0x00	; 0
+ 360:	e1 f7       	brne	.-8      	; 0x35a <main+0x27e>
+ 362:	00 c0       	rjmp	.+0      	; 0x364 <main+0x288>
+ 364:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 366:	60 e0       	ldi	r22, 0x00	; 0
+ 368:	82 e0       	ldi	r24, 0x02	; 2
+ 36a:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+		DIO_SetPortValue(Port_C,1);
+ 36e:	61 e0       	ldi	r22, 0x01	; 1
+ 370:	82 e0       	ldi	r24, 0x02	; 2
+ 372:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 376:	2f e7       	ldi	r18, 0x7F	; 127
+ 378:	8a e1       	ldi	r24, 0x1A	; 26
+ 37a:	96 e0       	ldi	r25, 0x06	; 6
+ 37c:	21 50       	subi	r18, 0x01	; 1
+ 37e:	80 40       	sbci	r24, 0x00	; 0
+ 380:	90 40       	sbci	r25, 0x00	; 0
+ 382:	e1 f7       	brne	.-8      	; 0x37c <main+0x2a0>
+ 384:	00 c0       	rjmp	.+0      	; 0x386 <main+0x2aa>
+ 386:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 388:	60 e0       	ldi	r22, 0x00	; 0
+ 38a:	82 e0       	ldi	r24, 0x02	; 2
+ 38c:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 390:	2f e7       	ldi	r18, 0x7F	; 127
+ 392:	8a e1       	ldi	r24, 0x1A	; 26
+ 394:	96 e0       	ldi	r25, 0x06	; 6
+ 396:	21 50       	subi	r18, 0x01	; 1
+ 398:	80 40       	sbci	r24, 0x00	; 0
+ 39a:	90 40       	sbci	r25, 0x00	; 0
+ 39c:	e1 f7       	brne	.-8      	; 0x396 <main+0x2ba>
+ 39e:	00 c0       	rjmp	.+0      	; 0x3a0 <main+0x2c4>
+ 3a0:	00 00       	nop
+ 3a2:	ae ce       	rjmp	.-676    	; 0x100 <main+0x24>
+		_delay_ms(250);
+	}
+	
+	//snake
+	else if(x==127){
+ 3a4:	8f 37       	cpi	r24, 0x7F	; 127
+ 3a6:	09 f0       	breq	.+2      	; 0x3aa <main+0x2ce>
+ 3a8:	ab ce       	rjmp	.-682    	; 0x100 <main+0x24>
+		DIO_SetPortValue(Port_C,1);
+ 3aa:	61 e0       	ldi	r22, 0x01	; 1
+ 3ac:	82 e0       	ldi	r24, 0x02	; 2
+ 3ae:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 3b2:	2f e7       	ldi	r18, 0x7F	; 127
+ 3b4:	8a e1       	ldi	r24, 0x1A	; 26
+ 3b6:	96 e0       	ldi	r25, 0x06	; 6
+ 3b8:	21 50       	subi	r18, 0x01	; 1
+ 3ba:	80 40       	sbci	r24, 0x00	; 0
+ 3bc:	90 40       	sbci	r25, 0x00	; 0
+ 3be:	e1 f7       	brne	.-8      	; 0x3b8 <main+0x2dc>
+ 3c0:	00 c0       	rjmp	.+0      	; 0x3c2 <main+0x2e6>
+ 3c2:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,3);
+ 3c4:	63 e0       	ldi	r22, 0x03	; 3
+ 3c6:	82 e0       	ldi	r24, 0x02	; 2
+ 3c8:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 3cc:	2f e7       	ldi	r18, 0x7F	; 127
+ 3ce:	8a e1       	ldi	r24, 0x1A	; 26
+ 3d0:	96 e0       	ldi	r25, 0x06	; 6
+ 3d2:	21 50       	subi	r18, 0x01	; 1
+ 3d4:	80 40       	sbci	r24, 0x00	; 0
+ 3d6:	90 40       	sbci	r25, 0x00	; 0
+ 3d8:	e1 f7       	brne	.-8      	; 0x3d2 <main+0x2f6>
+ 3da:	00 c0       	rjmp	.+0      	; 0x3dc <main+0x300>
+ 3dc:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,7);
+ 3de:	67 e0       	ldi	r22, 0x07	; 7
+ 3e0:	82 e0       	ldi	r24, 0x02	; 2
+ 3e2:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 3e6:	2f e7       	ldi	r18, 0x7F	; 127
+ 3e8:	8a e1       	ldi	r24, 0x1A	; 26
+ 3ea:	96 e0       	ldi	r25, 0x06	; 6
+ 3ec:	21 50       	subi	r18, 0x01	; 1
+ 3ee:	80 40       	sbci	r24, 0x00	; 0
+ 3f0:	90 40       	sbci	r25, 0x00	; 0
+ 3f2:	e1 f7       	brne	.-8      	; 0x3ec <main+0x310>
+ 3f4:	00 c0       	rjmp	.+0      	; 0x3f6 <main+0x31a>
+ 3f6:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,15);
+ 3f8:	6f e0       	ldi	r22, 0x0F	; 15
+ 3fa:	82 e0       	ldi	r24, 0x02	; 2
+ 3fc:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 400:	2f e7       	ldi	r18, 0x7F	; 127
+ 402:	8a e1       	ldi	r24, 0x1A	; 26
+ 404:	96 e0       	ldi	r25, 0x06	; 6
+ 406:	21 50       	subi	r18, 0x01	; 1
+ 408:	80 40       	sbci	r24, 0x00	; 0
+ 40a:	90 40       	sbci	r25, 0x00	; 0
+ 40c:	e1 f7       	brne	.-8      	; 0x406 <__EEPROM_REGION_LENGTH__+0x6>
+ 40e:	00 c0       	rjmp	.+0      	; 0x410 <__EEPROM_REGION_LENGTH__+0x10>
+ 410:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,31);
+ 412:	6f e1       	ldi	r22, 0x1F	; 31
+ 414:	82 e0       	ldi	r24, 0x02	; 2
+ 416:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 41a:	2f e7       	ldi	r18, 0x7F	; 127
+ 41c:	8a e1       	ldi	r24, 0x1A	; 26
+ 41e:	96 e0       	ldi	r25, 0x06	; 6
+ 420:	21 50       	subi	r18, 0x01	; 1
+ 422:	80 40       	sbci	r24, 0x00	; 0
+ 424:	90 40       	sbci	r25, 0x00	; 0
+ 426:	e1 f7       	brne	.-8      	; 0x420 <__EEPROM_REGION_LENGTH__+0x20>
+ 428:	00 c0       	rjmp	.+0      	; 0x42a <__EEPROM_REGION_LENGTH__+0x2a>
+ 42a:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,63);
+ 42c:	6f e3       	ldi	r22, 0x3F	; 63
+ 42e:	82 e0       	ldi	r24, 0x02	; 2
+ 430:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 434:	2f e7       	ldi	r18, 0x7F	; 127
+ 436:	8a e1       	ldi	r24, 0x1A	; 26
+ 438:	96 e0       	ldi	r25, 0x06	; 6
+ 43a:	21 50       	subi	r18, 0x01	; 1
+ 43c:	80 40       	sbci	r24, 0x00	; 0
+ 43e:	90 40       	sbci	r25, 0x00	; 0
+ 440:	e1 f7       	brne	.-8      	; 0x43a <__EEPROM_REGION_LENGTH__+0x3a>
+ 442:	00 c0       	rjmp	.+0      	; 0x444 <__EEPROM_REGION_LENGTH__+0x44>
+ 444:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,127);
+ 446:	6f e7       	ldi	r22, 0x7F	; 127
+ 448:	82 e0       	ldi	r24, 0x02	; 2
+ 44a:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 44e:	2f e7       	ldi	r18, 0x7F	; 127
+ 450:	8a e1       	ldi	r24, 0x1A	; 26
+ 452:	96 e0       	ldi	r25, 0x06	; 6
+ 454:	21 50       	subi	r18, 0x01	; 1
+ 456:	80 40       	sbci	r24, 0x00	; 0
+ 458:	90 40       	sbci	r25, 0x00	; 0
+ 45a:	e1 f7       	brne	.-8      	; 0x454 <__EEPROM_REGION_LENGTH__+0x54>
+ 45c:	00 c0       	rjmp	.+0      	; 0x45e <__EEPROM_REGION_LENGTH__+0x5e>
+ 45e:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,255);
+ 460:	6f ef       	ldi	r22, 0xFF	; 255
+ 462:	82 e0       	ldi	r24, 0x02	; 2
+ 464:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 468:	2f e7       	ldi	r18, 0x7F	; 127
+ 46a:	8a e1       	ldi	r24, 0x1A	; 26
+ 46c:	96 e0       	ldi	r25, 0x06	; 6
+ 46e:	21 50       	subi	r18, 0x01	; 1
+ 470:	80 40       	sbci	r24, 0x00	; 0
+ 472:	90 40       	sbci	r25, 0x00	; 0
+ 474:	e1 f7       	brne	.-8      	; 0x46e <__EEPROM_REGION_LENGTH__+0x6e>
+ 476:	00 c0       	rjmp	.+0      	; 0x478 <__EEPROM_REGION_LENGTH__+0x78>
+ 478:	00 00       	nop
+		_delay_ms(250);
+		DIO_SetPortValue(Port_C,0);
+ 47a:	60 e0       	ldi	r22, 0x00	; 0
+ 47c:	82 e0       	ldi	r24, 0x02	; 2
+ 47e:	0e 94 36 00 	call	0x6c	; 0x6c <DIO_SetPortValue>
+ 482:	2f e7       	ldi	r18, 0x7F	; 127
+ 484:	8a e1       	ldi	r24, 0x1A	; 26
+ 486:	96 e0       	ldi	r25, 0x06	; 6
+ 488:	21 50       	subi	r18, 0x01	; 1
+ 48a:	80 40       	sbci	r24, 0x00	; 0
+ 48c:	90 40       	sbci	r25, 0x00	; 0
+ 48e:	e1 f7       	brne	.-8      	; 0x488 <__EEPROM_REGION_LENGTH__+0x88>
+ 490:	00 c0       	rjmp	.+0      	; 0x492 <__EEPROM_REGION_LENGTH__+0x92>
+ 492:	00 00       	nop
+ 494:	35 ce       	rjmp	.-918    	; 0x100 <main+0x24>
+
+00000496 <_exit>:
+ 496:	f8 94       	cli
+
+00000498 <__stop_program>:
+ 498:	ff cf       	rjmp	.-2      	; 0x498 <__stop_program>
